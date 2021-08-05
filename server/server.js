@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const db = require('./config/connection');
-//const routes = require('./routes');
+const routes = require('./routes');
 
 // Apollo Server Requirements:
 const { ApolloServer } = require('apollo-server-express');
@@ -11,13 +11,20 @@ const { authMiddleware } = require('./utils/auth');
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  context: authMiddleware
-})
+let server = null;
+const serverStart = async() => {
 
-server.applyMiddleware({ app });
+  server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    context: authMiddleware
+  })
+  
+  await server.start()
+  server.applyMiddleware({ app });
+}
+
+serverStart()
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -31,7 +38,7 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
-//app.use(routes);
+app.use(routes);
 
 db.once('open', () => {
   app.listen(PORT, () => {
