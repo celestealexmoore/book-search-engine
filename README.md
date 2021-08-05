@@ -79,4 +79,4 @@
   celestealexmoore@gmail.com.
 
   ## Project Status
-  In Progress 1
+  In Progress
