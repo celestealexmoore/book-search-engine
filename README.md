@@ -68,7 +68,7 @@
   ![Animation shows "star wars" typed into a search box and books about Star Wars appearing as results.](./Assets/21-mern-homework-demo-01.gif)  
 
   ## Deployment  
-  [This project is deployed via Heroku.](./utils/readme-generator-vid.mov)  
+  [This project is deployed via Heroku.](https://agile-hollows-61039.herokuapp.com/)  
   
 
   ## Contributors  
